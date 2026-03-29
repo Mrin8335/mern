@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: backend
+    env: node
+    plan: free
+    buildFilter:
+      paths:
+      - backend/**
+    buildCommand: "cd backend && npm install && npm run build"
+    startCommand: "cd backend && npm run serve"
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        generateValue: true
+      - key: JWT_SECRET
+        generateValue: true
+  - type: static
+    name: frontend
+    env: static
+    plan: free
+    buildFilter:
+      paths:
+      - frontend/**
+    buildCommand: "cd frontend && npm install && npm run build"
+    staticPublishPath: ./frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: backend
+          property: url
