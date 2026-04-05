@@ -7,8 +7,8 @@ To use MongoDB Atlas as your database, you need to create a free account and a n
 3.  In your cluster, go to the "Database" section and click on the "Connect" button.
 4.  Select "Drivers" as the connection method.
 5.  Select "Node.js" as the driver and the latest version.
-6.  You will see a connection string that looks like this: `mongodb+srv://<username>:<password>@<cluster-url>/<database-name>?retryWrites=true&w=majority`
-7.  Replace `<username>`, `<password>`, `<cluster-url>`, and `<database-name>` with your actual credentials and database name.
+6.  You will see a connection string that looks like this: `mongodb+srv://mrinmoybhuiya88_db_user:Windows10@webpage.uklqhey.mongodb.net/?appName=webpage`
+7.  Replace the connection string with the one provided above if it's not already.
 8.  This connection string is your `MONGO_URI`.
 
 # Deployment Instructions
@@ -34,3 +34,18 @@ The project is now configured for deployment on Netlify using the `netlify.toml`
     *   `MONGO_URI`: The connection string for your MongoDB Atlas database. See the "MongoDB Atlas Setup" section above.
     *   `JWT_SECRET`: A secret key for signing JSON Web Tokens.
     *   `VITE_API_URL`: The URL of your backend API. This should be the URL of your Netlify site, e.g., `https://your-site.netlify.app/api`.
+
+## Docker Compose
+
+The project includes a `docker-compose.yml` file for easy deployment using Docker. The configuration includes services for the frontend, backend, MongoDB, and an Nginx reverse proxy.
+
+To deploy using Docker Compose:
+
+1.  Make sure you have [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) installed on your server or local machine.
+2.  Clone the repository and navigate to the project root directory.
+3.  Create a `.env` file in the `backend` directory with your required environment variables (e.g., `JWT_SECRET`).
+4.  Run the following command to build and start the containers in detached mode:
+    ```bash
+    docker-compose up -d --build
+    ```
+5.  The application will be accessible at `http://localhost` (or your server's IP address) via the Nginx reverse proxy.
