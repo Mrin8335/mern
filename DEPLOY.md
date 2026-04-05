@@ -2,7 +2,18 @@
 
 This guide provides instructions for deploying the application using GitHub Actions, Docker, Nginx, and MongoDB Atlas.
 
+<<<<<<< HEAD
 ## Prerequisites
+=======
+1.  Go to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) and create a free account.
+2.  Create a new cluster.
+3.  In your cluster, go to the "Database" section and click on the "Connect" button.
+4.  Select "Drivers" as the connection method.
+5.  Select "Node.js" as the driver and the latest version.
+6.  You will see a connection string that looks like this: `mongodb+srv://mrinmoybhuiya88_db_user:Windows10@webpage.uklqhey.mongodb.net/?appName=webpage`
+7.  Replace the connection string with the one provided above if it's not already.
+8.  This connection string is your `MONGO_URI`.
+>>>>>>> 778b49c98bb87cd321300c2490d790fc2bda0f7b
 
 - A GitHub account and repository for the project.
 - Docker and Docker Compose installed on your deployment server.
@@ -24,6 +35,7 @@ The connection string will look like: `mongodb+srv://<username>:<password>@clust
 
 Create a `.env` file in the `backend/` directory with the following variables:
 
+<<<<<<< HEAD
 ```
 MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/database_name
 JWT_SECRET=your_jwt_secret_key_here
@@ -178,3 +190,26 @@ sudo certbot --nginx -d yourdomain.com
 - Check Docker container logs: `docker-compose logs <service-name>`
 - Verify MongoDB Atlas connection string and network access
 - Confirm Nginx configuration is correct
+=======
+1.  Create a new site on Netlify from your Git repository.
+2.  Netlify will automatically detect and use the `netlify.toml` file for the build settings.
+3.  You will need to set the following environment variables in the Netlify dashboard:
+    *   `MONGO_URI`: The connection string for your MongoDB Atlas database. See the "MongoDB Atlas Setup" section above.
+    *   `JWT_SECRET`: A secret key for signing JSON Web Tokens.
+    *   `VITE_API_URL`: The URL of your backend API. This should be the URL of your Netlify site, e.g., `https://your-site.netlify.app/api`.
+
+## Docker Compose
+
+The project includes a `docker-compose.yml` file for easy deployment using Docker. The configuration includes services for the frontend, backend, MongoDB, and an Nginx reverse proxy.
+
+To deploy using Docker Compose:
+
+1.  Make sure you have [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) installed on your server or local machine.
+2.  Clone the repository and navigate to the project root directory.
+3.  Create a `.env` file in the `backend` directory with your required environment variables (e.g., `JWT_SECRET`).
+4.  Run the following command to build and start the containers in detached mode:
+    ```bash
+    docker-compose up -d --build
+    ```
+5.  The application will be accessible at `http://localhost` (or your server's IP address) via the Nginx reverse proxy.
+>>>>>>> 778b49c98bb87cd321300c2490d790fc2bda0f7b
